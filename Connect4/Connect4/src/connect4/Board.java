@@ -41,7 +41,42 @@ public class Board {
         return false;
     }
     
-    //checkWin
+    public boolean checkWin(int playerSymbol) {
+        //check horizontal
+        int consecutive = 0;
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                if (consecutive == 4) {
+                    return true;
+                }
+                if (board[i][j] == playerSymbol) {
+                    consecutive +=1;
+                }
+                
+                else {
+                    consecutive = 0;
+                }
+            }
+        }
+        consecutive = 0;
+        //check vertical
+        for (int i = 0; i < board[0].length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                if (consecutive == 4) {
+                    return true;
+                }
+                if (board[j][i] == playerSymbol) {
+                    consecutive += 1;
+                }
+                else {
+                    consecutive = 0;
+                }
+            }
+        }
+        //check diagonal top down
+        int[] diagTopDown;
+        int[] diagBotUp;
+    }
     
     //dropDown
     
