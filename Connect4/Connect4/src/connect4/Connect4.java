@@ -15,7 +15,7 @@ public class Connect4 {
     public int[][] getBoard(){
         return board;
     }
-    
+    //this is konst
     public String stringBoard() {
         String myBoard = "";
         for(int i = 0; i < board.length; i++){
