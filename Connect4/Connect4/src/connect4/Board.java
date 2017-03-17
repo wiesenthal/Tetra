@@ -41,18 +41,12 @@ public class Board {
         return false;
     }
     
-    //checkWin
-    
-    //dropDown
     public int dropDown(int col) {
     for (int i= 0; i< board[0].length; i++) {
         if (board[i][col]!= 0 ) {
             return i-1;
-        } else {
-            return -1;
         }
-    
+        }
+    return -1;
     }
-    
-   }
-}
+    }
