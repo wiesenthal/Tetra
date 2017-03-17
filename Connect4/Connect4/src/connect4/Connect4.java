@@ -31,18 +31,27 @@ public class Connect4 {
     
     //askMove2
     
-    //checkValid
+    public boolean checkValid(int col) {
+        for (int[] row : board) {
+            if (row[col] == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    //dropDown
     
     //checkWin
     
     public String getSymbol(int row, int col) {
         switch (board[row][col]) {
-            case 0:
-                return "-";
             case -1:
                 return "O";
             case 1:
                 return "●";
+            default:
+                return "-";
         }
     }
 }
