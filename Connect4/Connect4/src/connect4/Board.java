@@ -41,6 +41,8 @@ public class Board {
         return false;
     }
     
+    //checkWin
+    
     public boolean checkWin(int playerSymbol) {
         //check horizontal
         int consecutive = 0;
@@ -78,6 +80,22 @@ public class Board {
         int[] diagBotUp;
     }
     
-    //dropDown
+    //makeMove
     
+        public void makeMove(int col,int playerType) {
+        if (checkValid(col)) {
+            board[dropDown(col)][col] = playerType;
+        }
+    }
+    
+    //dropDown
+        
+    public int dropDown(int col) {
+    for (int i= 0; i< board[0].length; i++) {
+        if (board[i][col]!= 0 ) {
+            return i-1;
+        }
+        }
+    return -1;
+    }
 }
