@@ -44,7 +44,9 @@ public class Board {
     //checkWin
     
     public void makeMove(int col,int playerType) {
-        board[dropDown(int row)][col] = playerType;
+        if (checkValid(col)) {
+            board[dropDown(col)][col] = playerType;
+        }
     }
     
     //dropDown
