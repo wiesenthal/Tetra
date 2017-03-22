@@ -13,7 +13,7 @@ public class Player {
     int playerNum; //-1 or 1
     private Board theBoard;
     public void askMove() {
-        System.out.println("Where would you like to move?");
+        System.out.println("Which column would you like to move in?");
         Scanner scan = new Scanner(System.in);
         int col = scan.nextInt();
         if (theBoard.checkValid(col)) {
