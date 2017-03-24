@@ -16,6 +16,19 @@ public class Board {
     public boolean independence;
     
     private int[][] board = new int[8][8];
+    public Board() {
+        for (int i = 0; i < board.length; i ++){
+            for (int j = 0; j < board[0].length; j ++) {
+                board[i][j] = 0;
+            }
+        }
+    }
+    public Board(int[][] b) {
+        board = b;
+    }
+    public int[][] getBoard() {
+        return board;
+    }
     public String getSymbol(int row, int col) {
         switch (board[row][col]) {
             case -1:
@@ -43,6 +56,12 @@ public class Board {
             }
         }
         return false;
+    }
+    
+    public void makeMove(int col,int playerType) {
+        if (checkValid(col)) {
+            board[dropDown(col)][col] = playerType;
+        }
     }
     
     public boolean checkWin(int playerSymbol) {
@@ -147,6 +166,13 @@ public class Board {
         return false;
     }
     
-    //dropDown
+    public int dropDown(int col) {
+    for (int i= 0; i< board[0].length; i++) {
+        if (board[i][col]!= 0 ) {
+            return i-1;
+        }
+        }
+    return -1;
+    }
     
 }
