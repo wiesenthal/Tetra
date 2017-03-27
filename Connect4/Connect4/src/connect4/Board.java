@@ -11,13 +11,30 @@ package connect4;
  */
 
 public class Board {
-    private int[][] board = new int[6][7];
+    
+    //declare independence
+    public boolean independence;
+    
+    private int[][] board = new int[8][8];
+    public Board() {
+        for (int i = 0; i < board.length; i ++){
+            for (int j = 0; j < board[0].length; j ++) {
+                board[i][j] = 0;
+            }
+        }
+    }
+    public Board(int[][] b) {
+        board = b;
+    }
+    public int[][] getBoard() {
+        return board;
+    }
     public String getSymbol(int row, int col) {
         switch (board[row][col]) {
             case -1:
                 return "O";
             case 1:
-                return "●";
+                return "?";
             default:
                 return "-";
         }
@@ -41,12 +58,17 @@ public class Board {
         return false;
     }
     
-    //checkWin
+    public void makeMove(int col,int playerType) {
+        if (checkValid(col)) {
+            board[dropDown(col)][col] = playerType;
+        }
+    }
     
     public boolean checkWin(int playerSymbol) {
         //check horizontal
         int consecutive = 0;
         for (int i = 0; i < board.length; i++) {
+            consecutive = 0;
             for (int j = 0; j < board[0].length; j++) {
                 if (consecutive == 4) {
                     return true;
@@ -63,6 +85,7 @@ public class Board {
         consecutive = 0;
         //check vertical
         for (int i = 0; i < board[0].length; i++) {
+            consecutive = 0;
             for (int j = 0; j < board.length; j++) {
                 if (consecutive == 4) {
                     return true;
@@ -75,21 +98,74 @@ public class Board {
                 }
             }
         }
-        //check diagonal top down
-        int[] diagTopDown;
-        int[] diagBotUp;
-    }
-    
-    //makeMove
-    
-        public void makeMove(int col,int playerType) {
-        if (checkValid(col)) {
-            board[dropDown(col)][col] = playerType;
+        consecutive = 0;
+        //check diagonal top down part 1
+        for (int i = 7; i > 0; i -- ) {
+            consecutive = 0;
+            for (int j = 0; j < 7-i; j ++) {
+                if (consecutive == 4) {
+                    return true;
+                }
+                if (board[j][j+i] == playerSymbol) {
+                    consecutive += 1;
+                }
+                else {
+                    consecutive = 0;
+                }
+            }
         }
+        
+        consecutive = 0;
+        //check diagonal top down part 2
+        for (int i = 0; i > 7; i ++ ) {
+            consecutive = 0;
+            for (int j = 0; j < 7-i; j ++) {
+                if (consecutive == 4) {
+                    return true;
+                }
+                if (board[j+i][j] == playerSymbol) {
+                    consecutive += 1;
+                }
+                else {
+                    consecutive = 0;
+                }
+            }
+        }
+        consecutive = 0;
+        //check diagonal bot up part 1
+        for (int i = 7; i > 0; i -- ) {
+            consecutive = 0;
+            for (int j = 7; j > i; j --) {
+                if (consecutive == 4) {
+                    return true;
+                }
+                if (board[j][7+(i - j)] == playerSymbol) {
+                    consecutive += 1;
+                }
+                else {
+                    consecutive = 0;
+                }
+            }
+        }
+        consecutive = 0;
+        //check diagonal bot up part 2
+        for (int i = 0; i < 7; i ++) {
+            consecutive = 0;
+            for (int j = 0; j < i; j ++) {
+                if (consecutive == 4) {
+                    return true;
+                }
+                if (board[(i - j)][j] == playerSymbol) {
+                    consecutive += 1;
+                }
+                else {
+                    consecutive = 0;
+                }
+            }
+        }
+        return false;
     }
     
-    //dropDown
-        
     public int dropDown(int col) {
     for (int i= 0; i< board[0].length; i++) {
         if (board[i][col]!= 0 ) {
@@ -98,4 +174,5 @@ public class Board {
         }
     return -1;
     }
+    
 }
