@@ -20,7 +20,7 @@ public class Player {
     }
     public void askMove() {
         if (playerNum==2) {
-            theBoard.makeMove(aiMove(theBoard.getBoard()), -1);
+            theBoard.makeMove((aiMove(theBoard.getBoard(), -1)+20)*-1, -1);
         } else {
             System.out.println("Which column would you like to move in?");
             Scanner scan = new Scanner(System.in);
@@ -35,11 +35,11 @@ public class Player {
     }
     private int aiMove(int[][] bort, int num) { //num is which player it is
         Board board = new Board(bort);
-        if (board.checkWin(-1)) { //AI wins
-            return 1;
+        if (board.checkWin(num)) { //AI wins
+            return num;
         }
-        else if (board.checkWin(1)) { //Player wins
-            return -1;
+        else if (board.checkWin(num*-1)) { //Player wins
+            return num*-1;
         }
         else { //Not base case
             int[] slots = new int[8];
@@ -53,9 +53,29 @@ public class Player {
                 if (slots[i] != -2) { 
                     slots[i] = aiMove(testBoard(i, num, bort), num*-1);     
                 }
-
+                
             }
-            
+            if (num == 1) {
+                for (int i = 0; i < slots.length; i++) {
+                    if (slots[i] >= 1) {
+                        return (i + 20);
+                    }
+                    
+                }
+                return (-1);
+            }
+            if (num == -1) {
+                for (int i = 0; i < slots.length; i++) {
+                    if (slots[i] <= -1) {
+                        return (-1*i - 20);
+                    }
+                    
+                }
+                return (1);
+            }
+            else {
+                return (0);
+            }
         }
     }
     
