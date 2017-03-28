@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package connect4;
+ 
 import java.util.Scanner;
 /**
  *
@@ -22,7 +22,7 @@ public class Player {
         if (playerNum==2) {
             theBoard.makeMove((aiMove(theBoard.getBoard(), -1)+20)*-1, -1);
         } else {
-            System.out.println("Which column would you like to move in?");
+            System.out.println("Which column would you like to move in?" + this.playerNum);
             Scanner scan = new Scanner(System.in);
             int col = scan.nextInt();
             if (theBoard.checkValid(col)) {
@@ -33,12 +33,14 @@ public class Player {
             }
         }
     }
-    private int aiMove(int[][] bort, int num) { //num is which player it is
+    public int aiMove(int[][] bort, int num) { //num is which player it is
         Board board = new Board(bort);
         if (board.checkWin(num)) { //AI wins
+
             return num;
         }
         else if (board.checkWin(num*-1)) { //Player wins
+
             return num*-1;
         }
         else { //Not base case
@@ -66,6 +68,8 @@ public class Player {
             }
             if (num == -1) {
                 for (int i = 0; i < slots.length; i++) {
+                    System.out.println(slots[i]);
+                    System.out.println(i);
                     if (slots[i] <= -1) {
                         return (-1*i - 20);
                     }
@@ -79,10 +83,25 @@ public class Player {
         }
     }
     
+    public int getPlayerNum() {
+        if (playerNum==2){
+            return -1;
+        }
+        else {
+            return playerNum;
+        }
+    }
+    
     //creates a theoretical boardstate
     private int[][] testBoard(int col, int p, int[][] bort) {
-        Board board = new Board(bort);
-        board.makeMove(col, p);
-        return board.getBoard();
+        int[][] ink = new int[8][8];
+        for (int i = 0; i < bort.length; i++) {
+            for (int j = 0; j < bort[0].length; j++) {
+                ink[i][j] = bort[i][j];
+            }
+        }
+        Board boar = new Board(ink);
+        boar.makeMove(col, p);
+        return boar.getBoard();
     }
 }
