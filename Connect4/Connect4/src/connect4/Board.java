@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package connect4;
+ 
 
 /**
  *
@@ -34,7 +34,7 @@ public class Board {
             case -1:
                 return "O";
             case 1:
-                return "?";
+                return "X";
             default:
                 return "-";
         }
@@ -50,10 +50,8 @@ public class Board {
         return myBoard;
     }
     public boolean checkValid(int col) {
-        for (int[] row : board) {
-            if (row[col] == 0) {
-                return true;
-            }
+        if (board[0][col] == 0) {
+            return true;
         }
         return false;
     }
@@ -87,7 +85,7 @@ public class Board {
         for (int i = 0; i < board[0].length; i++) {
             consecutive = 0;
             for (int j = 0; j < board.length; j++) {
-                if (consecutive == 4) {
+                if (consecutive == 3) {
                     return true;
                 }
                 if (board[j][i] == playerSymbol) {
@@ -172,7 +170,7 @@ public class Board {
             return i-1;
         }
         }
-    return -1;
+    return 7;
     }
     
 }
