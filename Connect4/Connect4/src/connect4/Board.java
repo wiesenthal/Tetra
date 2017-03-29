@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
  
-
+package connect4;
 /**
  *
  * @author 2006184
