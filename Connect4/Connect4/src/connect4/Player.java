@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
- 
+package connect4;
 import java.util.Scanner;
 /**
  *
@@ -11,6 +11,8 @@ import java.util.Scanner;
  */
 public class Player {
     
+    
+    Sound sorry = new Sound("sorry.wav");
     int playerNum; //-1 or 1
     private Board theBoard;
     
@@ -18,10 +20,11 @@ public class Player {
         playerNum = pType; // 1 for player 1, -1 for player 2
         theBoard = b;
     }
-    public void askMove() {
+    public void askMove() throws Exception {
         if (playerNum==2) {
             theBoard.makeMove((aiMove(theBoard.getBoard(), -1)+20)*-1, -1);
         } else {
+            
             System.out.println("Which column would you like to move in?" + this.playerNum);
             Scanner scan = new Scanner(System.in);
             int col = scan.nextInt();
@@ -29,7 +32,10 @@ public class Player {
                 theBoard.makeMove(col, playerNum);
             }
             else {
+            
+            sorry.play();
             System.out.println("Invalid move, different spot?");
+            askMove();
             }
         }
     }
