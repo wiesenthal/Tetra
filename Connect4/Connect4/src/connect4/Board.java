@@ -50,7 +50,7 @@ public class Board {
         return myBoard;
     }
     public boolean checkValid(int col) {
-        if (board[0][col] == 0) {
+        if (board[0][col] == 0 && col >= 0 && col <= 7) {
             return true;
         }
         return false;
